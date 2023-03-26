@@ -13,12 +13,9 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path, include
-from myapp import views
+from imageencrypt import views
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('button1/', views.button1, name='button1'),
-    path('button2/', views.button2, name='button2'),
+    path('', views.home, name='home')
 ]
