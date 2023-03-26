@@ -15,7 +15,6 @@ def home(request): # render home.html
             return render(request, 'display_image.html', {'img': image_file})
         else:
             form = image()
-            print(":yhere")
             return render(request, 'upload_image.html', {'form': form})
         
     else:
