@@ -6,7 +6,6 @@
 
 import streamlit as st
 import unimodular_chaos_encryption as uce
-import streamlit_toggle as tog  # pip install streamlit-toggle-switch
 from PIL import Image
 from io import BytesIO
 import numpy as np
@@ -37,7 +36,7 @@ def run(col1, col2, image_path, option):
         encrypted = uce.encrypt(image_path, pass_1, pass_2)
         image_array = np.array(encrypted)
 
-        if option:  # Encrypt
+        if option == "Encrypt":  # Encrypt
             col2.write("### Encrypted Image :closed_lock_with_key:")
             col2.image(encrypted)
             downloadable = convert_image(encrypted)
@@ -63,10 +62,10 @@ def main():
     st.sidebar.write("## Upload and download :gear:")
     col1, col2 = st.columns(2)
     image_path = st.sidebar.file_uploader("Upload image", type=["png", "jpg", "jpeg"])
-    option = tog.st_toggle_switch(
-        label="Encrypt", default_value=True, label_after=False
-    )
     if image_path is not None:
+        option = st.select_slider(
+            "What do you want to do?", options=["Encrypt", "Decrypt"]
+        )
         run(col1, col2, image_path, option)
     st.write(
         """Welcome to our :lock: Image Encryptor/Decryptor! This tool allows you to protect your images from prying :eyes: by encrypting them with a password of your choice.
