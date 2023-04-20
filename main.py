@@ -63,9 +63,7 @@ def main():
     col1, col2 = st.columns(2)
     image_path = st.sidebar.file_uploader("Upload image", type=["png", "jpg", "jpeg"])
     st.sidebar.write(
-        """This webapp uses unimodular chaos encryption to protect the images that users upload and share on the platform. Unimodular chaos encryption is a state-of-the-art cryptographic technique that utilizes chaos theory and unimodular matrices to ensure the confidentiality and integrity of the encrypted data. With this encryption algorithm, users can rest assured that their sensitive images will be protected from unauthorized access and tampering while in transit or at rest on the platform.
-        
-Please note that while unimodular chaos encryption is a powerful cryptographic technique, no encryption method can guarantee absolute security. The effectiveness of encryption depends on many factors, including the strength of the encryption key, the quality of the random number generator, and the implementation of the encryption algorithm. This webapp has been designed to use the best practices in encryption and security, but we cannot guarantee the absolute security of the images uploaded and shared on the platform. Users should always take caution and follow best practices when sharing sensitive data online."""
+        "This webapp employs unimodular chaos encryption to secure user-uploaded images. This state-of-the-art technique uses chaos theory and unimodular matrices to ensure data confidentiality and integrity, providing users with protection from unauthorized access or tampering. However, no encryption method can guarantee absolute security, as effectiveness depends on various factors such as encryption key strength, random number generation quality, and algorithm implementation. While this webapp uses encryption best practices, users should exercise caution and best practices when sharing sensitive data online."
     )
     if image_path is not None:
         option = st.select_slider(
