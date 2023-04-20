@@ -29,30 +29,36 @@ def run(col1, col2, image_path, option):
     )  # Array of keys for pass 1 - need to reset per upload
     pass_1 = int(st.selectbox("Choose a key:", pass_1_choices))
     pass_2 = st.text_input("Enter your password", type="password")
+    if len(pass_2) <= 14:
+        if pass_1 != "" and pass_2 != "":
+            try:
+                pass_2 = float("0." + pass_2 + "1")
+                encrypted = uce.encrypt(image_path, pass_1, pass_2)
+                image_array = np.array(encrypted)
 
-    if pass_1 != "" and pass_2 != "":
-        pass_2 = float("0." + pass_2 + "1")
+                if option == "Encrypt":  # Encrypt
+                    col2.write("### Encrypted Image :closed_lock_with_key:")
+                    col2.image(encrypted)
+                    downloadable = convert_image(encrypted)
+                    st.sidebar.markdown("\n")
+                    st.sidebar.download_button(
+                        "Download encrypted image", downloadable, "encrypted.png", "image/png"
+                    )
+                else:
+                    decrypted = uce.decrypt(image, pass_1, pass_2)
+                    col2.write("### Decrypted Image :unlock:")
+                    col2.image(decrypted)
+                    downloadable = convert_image(decrypted)
+                    st.sidebar.markdown("\n")
+                    st.sidebar.download_button(
+                        "Download decrypted image", downloadable, "decrypted.png", "image/png"
+                    )
+            except:
+                st.warning("There is an error with your input. Please only use numbers and a maximum of 14 digits")
+    else:
+        st.warning("There is an error with your input. Please only use numbers and a maximum of 14 digits")
 
-        encrypted = uce.encrypt(image_path, pass_1, pass_2)
-        image_array = np.array(encrypted)
 
-        if option == "Encrypt":  # Encrypt
-            col2.write("### Encrypted Image :closed_lock_with_key:")
-            col2.image(encrypted)
-            downloadable = convert_image(encrypted)
-            st.sidebar.markdown("\n")
-            st.sidebar.download_button(
-                "Download encrypted image", downloadable, "encrypted.png", "image/png"
-            )
-        else:
-            decrypted = uce.decrypt(image, pass_1, pass_2)
-            col2.write("### Decrypted Image :unlock:")
-            col2.image(decrypted)
-            downloadable = convert_image(decrypted)
-            st.sidebar.markdown("\n")
-            st.sidebar.download_button(
-                "Download decrypted image", downloadable, "decrypted.png", "image/png"
-            )
 
 
 def main():
