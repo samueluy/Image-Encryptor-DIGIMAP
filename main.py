@@ -69,7 +69,11 @@ def main():
     col1, col2 = st.columns(2)
     image_path = st.sidebar.file_uploader("Upload image", type=["png", "jpg", "jpeg"])
     st.sidebar.write(
-        "This webapp employs unimodular chaos encryption to secure user-uploaded images. This state-of-the-art technique uses chaos theory and unimodular matrices to ensure data confidentiality and integrity, providing users with protection from unauthorized access or tampering. However, no encryption method can guarantee absolute security, as effectiveness depends on various factors such as encryption key strength, random number generation quality, and algorithm implementation. While this webapp uses encryption best practices, users should exercise caution and best practices when sharing sensitive data online."
+        """This webapp employs **unimodular chaos encryption** to secure user-uploaded images. This state-of-the-art technique uses chaos theory and unimodular matrices to ensure data confidentiality and integrity, providing users with protection from unauthorized access or tampering. However, no encryption method can guarantee absolute security, as effectiveness depends on various factors such as encryption key strength, random number generation quality, and algorithm implementation. While this webapp uses encryption best practices, users should exercise caution and best practices when sharing sensitive data online.
+
+• Max password length is 14 digits.
+
+• As you inrease the key size, the longer the processing time required"""
     )
     if image_path is not None:
         option = st.select_slider(
